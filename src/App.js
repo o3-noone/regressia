@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
   const [n, setN] = useState(0); // n sonini saqlash uchun holat
@@ -14,7 +14,7 @@ function App() {
     // N soni o'zgarishi bilan inputlar ro'yxatini to'ldirish
     const newInputs = [];
     for (let i = 0; i < e.target.value; i++) {
-      newInputs.push({ x: '', y: '', xy: '', xx: '' });
+      newInputs.push({ x: "", y: "", xy: "", xx: "" });
     }
     setInputs(newInputs);
   };
@@ -23,7 +23,7 @@ function App() {
     const newInputs = [...inputs];
     newInputs[index][field] = e.target.value;
     // X va Y kiritilganda X*Y va X*X ni hisoblash
-    if (field === 'x' || field === 'y') {
+    if (field === "x" || field === "y") {
       newInputs[index].xy = newInputs[index].x * newInputs[index].y;
       newInputs[index].xx = newInputs[index].x * newInputs[index].x;
     }
@@ -44,7 +44,7 @@ function App() {
     setSumXY(sumXYValues);
     setSumXX(sumXXValues);
   };
-  
+
   const calculateP = () => {
     const numerator = n * sumXY - sumX * sumY;
     const denominator = n * sumXX - sumX ** 2;
@@ -52,19 +52,26 @@ function App() {
     return P;
   };
   const calculateB = () => {
-    
     const numerator = sumXY * sumY - sumX * sumXY;
     const denominator = n * sumXY - sumX ** 2;
     const P = numerator / denominator;
     return P;
   };
-  
+const calculateY=()=>{
+  const num=calculateP() + calculateB()
+  return num
+}
   return (
     <div className="container">
       <div className="containerBox">
         <form action="Regressia" className="Regressia">
           <p for="inpN">n soni</p>
-          <input type="number" placeholder="n soni" value={n} onChange={handleNChange} />
+          <input
+            type="number"
+            placeholder="n soni"
+            value={n}
+            onChange={handleNChange}
+          />
           <div className="inputBox">
             <table>
               <thead>
@@ -78,17 +85,41 @@ function App() {
               <tbody>
                 {inputs.map((input, index) => (
                   <tr key={index}>
-                    <td><input type="number" value={input.x} onChange={(e) => handleInputChange(e, index, 'x')} /></td>
-                    <td><input type="number" value={input.y} onChange={(e) => handleInputChange(e, index, 'y')} /></td>
-                    <td><p>{input.xy}</p></td>
-                    <td><p>{input.xx}</p></td>
+                    <td>
+                      <input
+                        type="number"
+                        value={input.x}
+                        onChange={(e) => handleInputChange(e, index, "x")}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        value={input.y}
+                        onChange={(e) => handleInputChange(e, index, "y")}
+                      />
+                    </td>
+                    <td>
+                      <p>{input.xy}</p>
+                    </td>
+                    <td>
+                      <p>{input.xx}</p>
+                    </td>
                   </tr>
                 ))}
                 <tr>
-                  <td><p>{sumX}</p></td>
-                  <td><p>{sumY}</p></td>
-                  <td><p>{sumXY}</p></td>
-                  <td><p>{sumXX}</p></td>
+                  <td>
+                    <p>{sumX}</p>
+                  </td>
+                  <td>
+                    <p>{sumY}</p>
+                  </td>
+                  <td>
+                    <p>{sumXY}</p>
+                  </td>
+                  <td>
+                    <p>{sumXX}</p>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -98,21 +129,36 @@ function App() {
       <div className="natija">
         <div>
           <span>
-          P={`${n}*${sumXY}-${sumX}*${sumY}/${n}*${sumXY}-${sumXX}`} = {calculateP()}
+            P={`${n}*${sumXY}-${sumX}*${sumY}/${n}*${sumXY}-${sumXX}`} ={" "}
+            {calculateP()}
           </span>
-         <p>
-         P={calculateP()}
-         </p>
+          <p>P={calculateP()}</p>
         </div>
         <div>
           <span>
-          B={`${sumXY}*${sumY}-${sumX}*${sumXY}/${n}*${sumXY}-${sumXX}`} = {calculateB()}
+            B={`${sumXY}*${sumY}-${sumX}*${sumXY}/${n}*${sumXY}-${sumXX}`} ={" "}
+            {calculateB()}
           </span>
-         <p>
-         B={calculateB()}
-         </p>
+          <p>B={calculateB()}</p>
         </div>
-
+        <thead>
+          <tr>
+            <th>P</th>
+            <th>B</th>
+            <th>Y</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>
+            <p>{calculateP()}</p>
+          </td>
+          <td>
+            <p>{calculateB()}</p>
+          </td>
+          <td>
+            <p>{calculateY()}</p>
+          </td>
+        </tr>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@
   background-color: white;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .containerBox{
     width: 600px;

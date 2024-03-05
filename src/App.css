@@ -45,3 +45,9 @@ td>input{
     border: none;
     text-align: center;
 }
+
+a{
+    color: black;
+    margin: 25px;
+    cursor: pointer;
+}

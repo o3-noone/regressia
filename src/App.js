@@ -11,14 +11,14 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <Link to={"/regressia"}>Regressia</Link>
-              <Link to={"/integratsia"}>Integratsia</Link>
+              <Link to={"/intelektual"}>Intelektual uchun</Link>
+              <Link to={"/tizimli"}>Tizimli dasturlash uchun</Link>
             </>
           } />
-          <Route path="/regressia" element={
+          <Route path="/intelektual" element={
             <Regressia />
           } />
-            <Route path="/integratsia" element={
+            <Route path="/tizimli" element={
             <Integratsia />
           } />
         </Routes>
